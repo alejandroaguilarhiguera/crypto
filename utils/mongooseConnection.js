@@ -6,10 +6,14 @@ async function mongooseConnection() {
   let time = 1;
   let connectSuccess = false;
   let connection;
+  const { MONGO_HOST, MONGO_NAME } = process.env;
+  if (!MONGO_HOST) {
+    return null;
+  }
+  
   do {
     try {
       const message = await new Promise((resolve, reject) => {
-        const {MONGO_HOST, MONGO_NAME } = process.env;
         const host = 'mongodb://' + MONGO_HOST + '/' + MONGO_NAME;
         mongoose.connect(host, {
           useNewUrlParser: true,

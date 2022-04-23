@@ -1,0 +1,3 @@
+### Obtener la información de la cuenta de un usuario de binance
+GET http://localhost:3003/binance/get-account HTTP/1.1
+content-type: application/json

@@ -1,0 +1,7 @@
+### Se obtienen las 10 monedas que más perdidas de valor tuvieron en las últimas 24 horas
+GET http://localhost:3003/binance HTTP/1.1
+content-type: application/json
+
+### Se obtienen las 12 monedas que más perdidas de valor tuvieron en las últimas 24 horas
+GET http://localhost:3003/binance?limit=12 HTTP/1.1
+content-type: application/json

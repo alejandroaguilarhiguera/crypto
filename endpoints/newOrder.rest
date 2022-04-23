@@ -1,0 +1,26 @@
+### Poner una orden tipo “Limit” con la moneda que más perdió en las últimas 24hrs
+POST http://localhost:3003/binance/new-order HTTP/1.1
+content-type: application/json
+
+{
+    "recvWindow": "60000",
+    "side": "BUY",
+    "timeInForce": "GTC",
+    "quantity": "1",
+    "price": 1,
+    "type": "LIMIT"
+}
+
+### Poner una orden tipo “Limit” con la moneda que se elija
+POST http://localhost:3003/binance/new-order HTTP/1.1
+content-type: application/json
+
+{
+    "symbol": "BTCBUSD",
+    "recvWindow": "60000",
+    "side": "BUY",
+    "timeInForce": "GTC",
+    "quantity": "1",
+    "price": 1,
+    "type": "LIMIT"
+}
