@@ -3,7 +3,6 @@ POST http://localhost:3003/binance/new-order HTTP/1.1
 content-type: application/json
 
 {
-    "recvWindow": "60000",
     "side": "BUY",
     "timeInForce": "GTC",
     "quantity": "1",
@@ -16,11 +15,10 @@ POST http://localhost:3003/binance/new-order HTTP/1.1
 content-type: application/json
 
 {
-    "symbol": "BTCBUSD",
-    "recvWindow": "60000",
-    "side": "BUY",
-    "timeInForce": "GTC",
-    "quantity": "1",
-    "price": 1,
-    "type": "LIMIT"
+      "symbol": "BNBUSDT",
+      "side": "BUY",
+      "timeInForce": "GTC",
+      "quantity": "1",
+      "price": "350",
+      "type": "LIMIT"
 }

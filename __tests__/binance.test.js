@@ -35,6 +35,23 @@ const accountSchema = Joi.object().keys({
   ),
 });
 
+const newOrderSchema = Joi.object().keys({
+  symbol: Joi.string().required(),
+  orderId: Joi.number().required(),
+  orderListId: Joi.number().required(),
+  clientOrderId: Joi.string().required(),
+  transactTime: Joi.number().required(),
+  price: Joi.string().required(),
+  origQty: Joi.string().required(),
+  executedQty: Joi.string().required(),
+  cummulativeQuoteQty: Joi.string().required(),
+  status: Joi.string().required(),
+  timeInForce: Joi.string().required(),
+  type: Joi.string().required(),
+  side: Joi.string().required(),
+  fills: Joi.array().items(Joi.string()),
+})
+
 let agent;
 
 beforeAll(async () => {
@@ -87,27 +104,31 @@ describe('BINANCE', () => {
     expect(error).toBeUndefined();
   }, 10000);
 
+  test('Crear una orden con BNB', async () => {
+    const response = await agent.post(`/binance/new-order`).set(headers).send({
+      symbol: 'BNBUSDT',
+      side: 'BUY',
+      timeInForce: 'GTC',
+      quantity: '1',
+      price: '350',
+      type: 'LIMIT'
+    });
+    expect(response.status).toBe(201);
+    const { error } = newOrderSchema.validate(response.body);
+    expect(error).toBeUndefined();
+  }, 10000);
+
   test('Comprar la moneda más baja', async () => {
     const response = await agent.post(`/binance/new-order`).set(headers).send({
       side: 'BUY',
       timeInForce: 'GTC',
       quantity: '1',
-      price: 0.1,
+      price: '0.1',
       type: 'LIMIT'
     });
     expect(response.status).toBe(201);
-  }, 10000);
-
-  test('Crear una orden con bitcoin', async () => {
-    const response = await agent.post(`/binance/new-order`).set(headers).send({
-      symbol: 'BTCBUSD',
-      side: 'BUY',
-      timeInForce: 'GTC',
-      quantity: '1',
-      price: 0.1,
-      type: 'LIMIT'
-    });
-    expect(response.status).toBe(201);
+    const { error } = newOrderSchema.validate(response.body);
+    expect(error).toBeUndefined();
   }, 10000);
 
 });

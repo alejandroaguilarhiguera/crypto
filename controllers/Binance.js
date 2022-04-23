@@ -105,7 +105,7 @@ module.exports = {
           [lowestCoin] = coins;
         }
       }
-      const { symbol = lowestCoin.symbol, side, type } = req.body;
+      const { symbol = lowestCoin?.symbol, side, type } = req.body;
       try {
         const { data } = await req.app.binance.newOrder(symbol, side, type, {
           ...req.body,
